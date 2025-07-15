@@ -1,0 +1,91 @@
+2025-07-15T21:19:25.626125680+01:00 - INFO - Starting server...
+2025-07-15T21:24:48.297875156+01:00 - INFO - Starting server...
+2025-07-15T21:26:41.860882666+01:00 - INFO - Starting server...
+2025-07-15T21:31:27.498605912+01:00 - INFO - Starting server...
+2025-07-15T22:30:59.011188263+01:00 - INFO - Starting server...
+2025-07-15T22:33:04.046561558+01:00 - INFO - Starting server...
+2025-07-15T22:49:53.200540846+01:00 - INFO - Starting server...
+2025-07-15T22:49:53.320552616+01:00 - INFO - relation "users" already exists, skipping
+2025-07-15T22:49:53.412316077+01:00 - INFO - relation "admins" already exists, skipping
+2025-07-15T22:49:53.413531823+01:00 - INFO - relation "sessions" already exists, skipping
+2025-07-15T22:49:53.414615008+01:00 - INFO - relation "interactions" already exists, skipping
+2025-07-15T22:49:53.415577021+01:00 - INFO - relation "sticker_metrics" already exists, skipping
+2025-07-15T22:50:38.663444954+01:00 - INFO - Starting server...
+2025-07-15T22:50:38.760234247+01:00 - INFO - relation "users" already exists, skipping
+2025-07-15T22:50:38.852535606+01:00 - INFO - relation "admins" already exists, skipping
+2025-07-15T22:50:38.853731277+01:00 - INFO - relation "sessions" already exists, skipping
+2025-07-15T22:50:38.854800586+01:00 - INFO - relation "interactions" already exists, skipping
+2025-07-15T22:50:38.855842051+01:00 - INFO - relation "sticker_metrics" already exists, skipping
+2025-07-15T22:52:56.077837029+01:00 - INFO - Starting server...
+2025-07-15T22:52:56.174701600+01:00 - INFO - relation "users" already exists, skipping
+2025-07-15T22:52:56.266955917+01:00 - INFO - relation "admins" already exists, skipping
+2025-07-15T22:52:56.268241400+01:00 - INFO - relation "sessions" already exists, skipping
+2025-07-15T22:52:56.269332362+01:00 - INFO - relation "interactions" already exists, skipping
+2025-07-15T22:52:56.270384090+01:00 - INFO - relation "sticker_metrics" already exists, skipping
+2025-07-15T22:52:56.272219077+01:00 - INFO - starting 4 workers
+2025-07-15T22:52:56.272322654+01:00 - INFO - Actix runtime found; starting in Actix runtime
+2025-07-15T22:52:56.272380436+01:00 - INFO - starting service: "actix-web-service-127.0.0.1:8080", workers: 4, listening on: 127.0.0.1:8080
+2025-07-15T22:52:56.275606593+01:00 - ERROR - Wildcard in `allowed_origin` is not allowed. Use `send_wildcard`.
+2025-07-15T22:52:56.280684924+01:00 - ERROR - `allowed_origin` argument must not be wildcard (`*`)
+2025-07-15T22:52:56.280913137+01:00 - ERROR - Initialization of HTTP service error: ()
+2025-07-15T22:52:56.280997596+01:00 - ERROR - can not start worker: ()
+2025-07-15T22:52:56.281820255+01:00 - ERROR - Failed to start server: can not start server service 0
+2025-07-15T22:55:56.126770008+01:00 - INFO - Starting server...
+2025-07-15T22:55:56.220373349+01:00 - INFO - relation "users" already exists, skipping
+2025-07-15T22:55:56.310884040+01:00 - INFO - relation "admins" already exists, skipping
+2025-07-15T22:55:56.312161139+01:00 - INFO - relation "sessions" already exists, skipping
+2025-07-15T22:55:56.313260468+01:00 - INFO - relation "interactions" already exists, skipping
+2025-07-15T22:55:56.314210420+01:00 - INFO - relation "sticker_metrics" already exists, skipping
+2025-07-15T22:55:56.315557876+01:00 - INFO - starting 4 workers
+2025-07-15T22:55:56.315678316+01:00 - INFO - Actix runtime found; starting in Actix runtime
+2025-07-15T22:55:56.315746583+01:00 - INFO - starting service: "actix-web-service-127.0.0.1:8080", workers: 4, listening on: 127.0.0.1:8080
+2025-07-15T22:55:56.318936485+01:00 - ERROR - Wildcard in `allowed_origin` is not allowed. Use `send_wildcard`.
+2025-07-15T22:55:56.324096653+01:00 - ERROR - `allowed_origin` argument must not be wildcard (`*`)
+2025-07-15T22:55:56.324302324+01:00 - ERROR - Initialization of HTTP service error: ()
+2025-07-15T22:55:56.324373220+01:00 - ERROR - can not start worker: ()
+2025-07-15T22:55:56.325158419+01:00 - ERROR - Failed to start server: can not start server service 0
+2025-07-15T22:56:54.043899691+01:00 - INFO - Starting server...
+2025-07-15T22:56:54.137657268+01:00 - INFO - relation "users" already exists, skipping
+2025-07-15T22:56:54.228260315+01:00 - INFO - relation "admins" already exists, skipping
+2025-07-15T22:56:54.229526476+01:00 - INFO - relation "sessions" already exists, skipping
+2025-07-15T22:56:54.230563778+01:00 - INFO - relation "interactions" already exists, skipping
+2025-07-15T22:56:54.231584958+01:00 - INFO - relation "sticker_metrics" already exists, skipping
+2025-07-15T22:56:54.232851816+01:00 - INFO - starting 4 workers
+2025-07-15T22:56:54.232972618+01:00 - INFO - Actix runtime found; starting in Actix runtime
+2025-07-15T22:56:54.233031240+01:00 - INFO - starting service: "actix-web-service-127.0.0.1:8080", workers: 4, listening on: 127.0.0.1:8080
+2025-07-15T22:58:49.860184328+01:00 - INFO - 127.0.0.1 "GET /health HTTP/1.1" 200 17 "-" "curl/8.11.1" 0.000462
+2025-07-15T22:58:55.644678980+01:00 - INFO - 127.0.0.1 "GET /login HTTP/1.1" 404 0 "-" "curl/8.11.1" 0.000555
+2025-07-15T22:59:38.501295465+01:00 - INFO - 127.0.0.1 "GET /auth/register/user HTTP/1.1" 404 0 "-" "curl/8.11.1" 0.000433
+2025-07-15T23:01:54.435231090+01:00 - INFO - 127.0.0.1 "GET /auth/login/admin HTTP/1.1" 404 0 "-" "curl/8.11.1" 0.000535
+2025-07-15T23:02:26.285591656+01:00 - INFO - 127.0.0.1 "GET /user/auth/login/admin HTTP/1.1" 401 0 "-" "curl/8.11.1" 0.000497
+2025-07-15T23:02:40.333002565+01:00 - INFO - 127.0.0.1 "GET /admin/auth/login/admin HTTP/1.1" 401 0 "-" "curl/8.11.1" 0.000526
+2025-07-15T23:13:21.985891055+01:00 - INFO - SIGINT received; starting forced shutdown
+2025-07-15T23:13:21.986287921+01:00 - INFO - accept thread stopped
+2025-07-15T23:13:21.986421370+01:00 - INFO - shutting down idle worker
+2025-07-15T23:13:21.986496304+01:00 - INFO - shutting down idle worker
+2025-07-15T23:13:21.986609999+01:00 - INFO - shutting down idle worker
+2025-07-15T23:13:21.986737597+01:00 - INFO - shutting down idle worker
+2025-07-15T23:13:22.288528760+01:00 - INFO - Server started successfully
+2025-07-15T23:14:04.699830287+01:00 - INFO - Starting server...
+2025-07-15T23:14:04.793656595+01:00 - INFO - relation "users" already exists, skipping
+2025-07-15T23:14:04.885365684+01:00 - INFO - relation "admins" already exists, skipping
+2025-07-15T23:14:04.886811081+01:00 - INFO - relation "sessions" already exists, skipping
+2025-07-15T23:14:04.887907726+01:00 - INFO - relation "interactions" already exists, skipping
+2025-07-15T23:14:04.888904314+01:00 - INFO - relation "sticker_metrics" already exists, skipping
+2025-07-15T23:14:04.890345341+01:00 - INFO - starting 4 workers
+2025-07-15T23:14:04.890461955+01:00 - INFO - Actix runtime found; starting in Actix runtime
+2025-07-15T23:14:04.890543017+01:00 - INFO - starting service: "actix-web-service-127.0.0.1:8080", workers: 4, listening on: 127.0.0.1:8080
+2025-07-15T23:14:16.922864734+01:00 - INFO - 127.0.0.1 "GET /health HTTP/1.1" 200 17 "-" "curl/8.11.1" 0.000618
+2025-07-15T23:14:22.221917623+01:00 - INFO - 127.0.0.1 "GET /login HTTP/1.1" 404 0 "-" "curl/8.11.1" 0.000565
+2025-07-15T23:14:54.191948802+01:00 - INFO - 127.0.0.1 "GET /auth/register/user HTTP/1.1" 404 0 "-" "curl/8.11.1" 0.000570
+2025-07-15T23:15:07.288099039+01:00 - INFO - 127.0.0.1 "GET /auth/register/user HTTP/1.1" 404 0 "-" "curl/8.11.1" 0.000443
+2025-07-15T23:16:27.057639642+01:00 - INFO - 127.0.0.1 "POST /auth/register/user HTTP/1.1" 200 218 "-" "curl/8.11.1" 2.215420
+2025-07-15T23:17:15.294073909+01:00 - WARN - User registration failed: error returned from database: duplicate key value violates unique constraint "users_username_key"
+2025-07-15T23:17:15.294354625+01:00 - INFO - 127.0.0.1 "POST /auth/register/user HTTP/1.1" 400 23 "-" "curl/8.11.1" 1.999851
+2025-07-15T23:17:31.535534231+01:00 - INFO - SIGINT received; starting forced shutdown
+2025-07-15T23:17:31.535869751+01:00 - INFO - accept thread stopped
+2025-07-15T23:17:31.535927250+01:00 - INFO - shutting down idle worker
+2025-07-15T23:17:31.536045711+01:00 - INFO - shutting down idle worker
+2025-07-15T23:17:31.536143702+01:00 - INFO - shutting down idle worker
+2025-07-15T23:17:31.536273657+01:00 - INFO - shutting down idle worker
+2025-07-15T23:17:31.838117533+01:00 - INFO - Server started successfully
