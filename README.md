@@ -275,3 +275,4 @@ MIT License. Use, modify, and share freely!
 - Explore [Actix web docs](https://actix.rs/docs/) or [SQLx docs](https://docs.rs/sqlx).
 
 Happy coding with sticker-proj! 🚀
+# sticker-recommendation-system
