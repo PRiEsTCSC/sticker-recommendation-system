@@ -36,19 +36,20 @@ pub async fn init_app() -> std::io::Result<()> {
                 
                 .app_data(web::Data::new(auth_config.clone()))
                 
-                .configure(routes::health::init_routes)
-                
-                .configure(routes::auth::init_routes)
-
-                .service(
-                    web::scope("/user")
-                        .wrap(auth.clone())
-                        .configure(routes::user::init_routes),
-                )
-                .service(
-                    web::scope("/admin")
-                        .wrap(auth)
-                        .configure(routes::admin::init_routes),
+				.service(
+                    web::scope("/v1")
+                        .configure(routes::health::init_routes)
+                        .configure(routes::auth::init_routes)
+                        .service(
+                            web::scope("/user")
+                                .wrap(auth.clone())
+                                .configure(routes::user::init_routes)
+                        )
+                        .service(
+                            web::scope("/admin")
+                                .wrap(auth)
+                                .configure(routes::admin::init_routes)
+                        )
                 )
         }
     )

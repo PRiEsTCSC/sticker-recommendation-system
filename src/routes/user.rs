@@ -3,7 +3,7 @@ use crate::structs::database_structs::{DatabaseConnection, ManagementRequest, Up
 use uuid::Uuid;
 use actix_web::error::Error as ActixError;
 
-#[put("/user/update-username")]
+#[put("/update-username")]
 async fn update_username(
     db: web::Data<DatabaseConnection>,
     user_id: web::ReqData<String>,
@@ -25,7 +25,7 @@ async fn update_username(
     }
 }
 
-#[delete("/user/delete")]
+#[delete("/delete")]
 async fn delete_user(
     db: web::Data<DatabaseConnection>,
     user_id: web::ReqData<String>,

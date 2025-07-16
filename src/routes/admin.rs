@@ -3,7 +3,7 @@ use crate::structs::database_structs::{DatabaseConnection, RegisterRequest, Mana
 use uuid::Uuid;
 use actix_web::error::Error as ActixError;
 
-#[get("/admin/users")]
+#[get("/users")]
 async fn list_users(db: web::Data<DatabaseConnection>) -> Result<HttpResponse, ActixError> {
     db.get_all_users().await
         .map(|users| HttpResponse::Ok().json(users))
@@ -13,7 +13,7 @@ async fn list_users(db: web::Data<DatabaseConnection>) -> Result<HttpResponse, A
         })
 }
 
-#[post("/admin/users")]
+#[post("/users")]
 async fn add_user(
     db: web::Data<DatabaseConnection>,
     req: web::Json<RegisterRequest>,
@@ -26,7 +26,7 @@ async fn add_user(
         })
 }
 
-#[put("/admin/users/{id}")]
+#[put("/users/{id}")]
 async fn update_user(
     db: web::Data<DatabaseConnection>,
     path: web::Path<String>,
@@ -47,7 +47,7 @@ async fn update_user(
         })
 }
 
-#[delete("/admin/users/{id}")]
+#[delete("/users/{id}")]
 async fn delete_user(
     db: web::Data<DatabaseConnection>,
     path: web::Path<String>,
