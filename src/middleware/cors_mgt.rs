@@ -4,9 +4,8 @@ use std::env;
 
 pub fn handle_cors() -> Cors {
     if let Ok(allowed_origin) = env::var("FRONTEND_URL") {
-println!("hello");
         Cors::default()
-            .allow_any_origin()
+            .allowed_origin(&allowed_origin) // ✅ only this is valid
             .allowed_methods(vec!["GET", "POST", "PUT", "DELETE"])
             .allowed_headers(vec![header::AUTHORIZATION, header::CONTENT_TYPE])
             .supports_credentials()
@@ -16,3 +15,4 @@ println!("hello");
         Cors::permissive()
     }
 }
+
