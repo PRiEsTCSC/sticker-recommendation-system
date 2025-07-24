@@ -52,3 +52,26 @@ impl AuthConfig {
         )?;
         Ok(decoded.claims)
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+#[derive(Clone)]
+#[allow(dead_code)]
+pub struct AuthData {
+    pub id: String,
+    pub role: String,
+}
+
+impl AuthData {
+    pub fn new(id: String, role: String) -> Self {
+        AuthData { id, role }
+    }
+}

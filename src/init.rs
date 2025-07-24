@@ -19,6 +19,7 @@ pub async fn init_app() -> std::io::Result<()> {
     
         let db = DatabaseConnection::new().await.expect("Failed to connect to database");
         db.init_schema().await.expect("Failed to initialize database schema");
+        let redis = db.redis.clone();
         let auth_config = AuthConfig::new();
     
     // Start the server
@@ -34,23 +35,30 @@ pub async fn init_app() -> std::io::Result<()> {
 
                 .app_data(Data::new(db.clone()))
                 
+                .app_data(Data::new(redis.clone()))
+                
                 .app_data(web::Data::new(auth_config.clone()))
                 
-				.service(
-                    web::scope("/v1")
-                        .configure(routes::health::init_routes)
-                        .configure(routes::auth::init_routes)
-                        .service(
-                            web::scope("/user")
-                                .wrap(auth.clone())
-                                .configure(routes::user::init_routes)
-                        )
-                        .service(
-                            web::scope("/admin")
-                                .wrap(auth)
-                                .configure(routes::admin::init_routes)
-                        )
-                )
+.service(
+    web::scope("/v1")
+        .configure(routes::health::init_routes)
+        .configure(routes::auth::init_routes)
+        .service(
+            web::scope("/sticker")
+                .wrap(auth.clone())
+                .configure(routes::recommend::init_routes) // Route becomes /v1/sticker/find
+        )
+        .service(
+            web::scope("/user")
+                .wrap(auth.clone())
+                .configure(routes::user::init_routes)
+        )
+        .service(
+            web::scope("/admin")
+                .wrap(auth)
+                .configure(routes::admin::init_routes)
+        )
+)
         }
     )
     .workers(4)

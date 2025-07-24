@@ -1,11 +1,15 @@
+use std::sync::Arc;
+use redis::Client;
 use sqlx::{Pool, Postgres, FromRow};
 use serde::{Deserialize, Serialize};
 use chrono::NaiveDateTime;
 use uuid::Uuid;
 
+
 #[derive(Clone)]
 pub struct DatabaseConnection {
     pub pool: Pool<Postgres>,
+    pub redis: Arc<Client>,
 }
 
 #[derive(Debug, FromRow, Serialize)]
@@ -24,7 +28,7 @@ pub struct Admin {
     pub failed_attempts: i32,
 }
 
-
+#[allow(dead_code)]
 #[derive(Debug, FromRow)]
 pub struct Session {
     pub id: Uuid,
@@ -58,10 +62,24 @@ pub struct RegisterRequest {
     pub password: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct RecommendRequest {
-    pub text: String,
+    pub username: String,
+    pub input_text: String,
 }
+
+#[derive(Serialize, Clone)]
+pub struct RecommendResponse {
+    pub detected_emotion: String,
+    pub sticker_urls: Vec<String>, // Changed from sticker_url: String
+}
+
+// #[derive(Clone)]
+// pub struct JwtMiddlewareStruct{
+    
+//     pub user : String,
+//     pub credentials: BearerAuth,
+// }
 
 #[derive(Debug, FromRow, Serialize)]
 pub struct StickerMetric {
@@ -72,10 +90,10 @@ pub struct StickerMetric {
     pub last_used: NaiveDateTime,
 }
 
-#[derive(Deserialize)]
-pub struct FavoriteRequest {
-    pub sticker_url: String,
-}
+// #[derive(Deserialize)]
+// pub struct FavoriteRequest {
+//     pub sticker_url: String,
+// }
 
 #[derive(Deserialize)]
 pub struct UpdateUsernameRequest {

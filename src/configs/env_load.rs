@@ -20,3 +20,10 @@ pub fn load_database_url() -> String {
     env::var("DATABASE_URL")
         .expect("DATABASE_URL environment variable must be set")
 }
+
+
+pub fn load_redis_url() -> String {
+    dotenv().ok();
+    env::var("REDIS_URL")
+        .expect("REDIS_URL environment variable must be set")
+    }

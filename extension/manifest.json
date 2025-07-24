@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Sticker Finder",
+  "version": "1.0",
+  "description": "Find stickers based on selected text",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "scripting",
+    "tabs",
+    "notifications",
+    "activeTab"
+  ],
+  "host_permissions": [
+  	"https://x.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "48": "icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*"],
+      "js": ["index.js"]
+    }
+  ],
+  "icons": {
+    "48": "icon.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  }
+}
