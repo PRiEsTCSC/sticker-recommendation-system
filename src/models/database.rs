@@ -226,12 +226,14 @@ impl DatabaseConnection {
     pub async fn register_user(&self, req: RegisterRequest) -> Result<User, sqlx::Error> {
         let password_hash = bcrypt::hash(&req.password, bcrypt::DEFAULT_COST).expect("Failed to hash password");
         let user_id = Uuid::new_v4();
+        let created_at = chrono::Utc::now().naive_utc();
         let user = sqlx::query_as::<_, User>(
-            "INSERT INTO users (id, username, password_hash) VALUES ($1, $2, $3) RETURNING *",
+            "INSERT INTO users (id, username, password_hash, created_at) VALUES ($1, $2, $3, $4) RETURNING *",
         )
         .bind(user_id)
         .bind(&req.username)
         .bind(&password_hash)
+        .bind(created_at)
         .fetch_one(&self.pool)
         .await?;
         Ok(user)
