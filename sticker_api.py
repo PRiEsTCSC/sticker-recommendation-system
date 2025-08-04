@@ -135,6 +135,166 @@ def search_stickers(q: str, rating: str = "g") -> List[dict]:
         print(f"ERROR: Unexpected error: {str(e)}", file=sys.stderr)
         return [{"url": "https://giphy.com/sticker-not-found-unexpected-error", "preview": "", "source": "https://giphy.com/"}]
 
+
+
+
+
+
+
+
+
+def search_stickers_dashboard(q: str, rating: str = "g") -> List[dict]:
+    """Search for stickers using GIPHY API."""
+    if not GIPHY_API_KEY:
+        print("ERROR: Missing GIPHY_API_KEY in environment variables", file=sys.stderr)
+        return [{"url": "https://giphy.com/sticker-not-found-no-api-key", "preview": "", "source": "https://giphy.com/"}]
+    
+    params = {
+        "api_key": GIPHY_API_KEY,
+        "q": q,
+        "limit": 9,
+        "rating": rating,
+        "bundle": "messaging_non_clips"
+    }
+    
+    print(f"DEBUG: Searching for stickers with query: '{q}', rating: '{rating}'", file=sys.stderr)
+    
+    try:
+        with httpx.Client(timeout=10.0) as client:
+            print("DEBUG: Making request to GIPHY API", file=sys.stderr)
+            response = client.get("https://api.giphy.com/v1/stickers/search", params=params)
+            print(f"DEBUG: Response status: {response.status_code}", file=sys.stderr)
+            response.raise_for_status()
+            data = response.json()
+            
+            print(f"DEBUG: Got {len(data.get('data', []))} results from GIPHY", file=sys.stderr)
+            
+            results = []
+            for item in data.get("data", [])[:9]:
+                images = item.get("images", {})
+                sticker_data = {
+                    "url": images.get("original", {}).get("url", ""),
+                    "preview": images.get("preview_gif", {}).get("url", ""),
+                    "source": item.get("source_post_url", "https://giphy.com/")
+                }
+                results.append(sticker_data)
+                print(f"DEBUG: Added sticker: {sticker_data['url'][:50]}...", file=sys.stderr)
+            
+            if not results:
+                print(f"DEBUG: No results for query '{q}', trying fallback", file=sys.stderr)
+                fallback_params = params.copy()
+                fallback_params["q"] = "happy"
+                response = client.get("https://api.giphy.com/v1/stickers/search", params=fallback_params)
+                response.raise_for_status()
+                data = response.json()
+                for item in data.get("data", [])[:1]:
+                    images = item.get("images", {})
+                    results.append({
+                        "url": images.get("original", {}).get("url", ""),
+                        "preview": images.get("preview_gif", {}).get("url", ""),
+                        "source": item.get("source_post_url", "https://giphy.com/")
+                    })
+            
+            print(f"DEBUG: Returning {len(results)} results", file=sys.stderr)
+            return results
+            
+    except httpx.RequestError as e:
+        print(f"ERROR: Network error: {str(e)}", file=sys.stderr)
+        return [{"url": "https://giphy.com/sticker-not-found-network-error", "preview": "", "source": "https://giphy.com/"}]
+    except httpx.HTTPStatusError as e:
+        print(f"ERROR: HTTP error: {e.response.status_code} - {e.response.text}", file=sys.stderr)
+        return [{"url": "https://giphy.com/sticker-not-found-http-error", "preview": "", "source": "https://giphy.com/"}]
+    except Exception as e:
+        print(f"ERROR: Unexpected error: {str(e)}", file=sys.stderr)
+        return [{"url": "https://giphy.com/sticker-not-found-unexpected-error", "preview": "", "source": "https://giphy.com/"}]
+
+
+
+
+def search_stickers_recommend() -> List[dict]:
+    """Search for stickers using GIPHY API."""
+    if not GIPHY_API_KEY:
+        print("ERROR: Missing GIPHY_API_KEY in environment variables", file=sys.stderr)
+        return [{"url": "https://giphy.com/sticker-not-found-no-api-key", "preview": "", "source": "https://giphy.com/"}]
+    
+    params = {
+        "api_key": GIPHY_API_KEY,
+        "limit": 9,
+        "rating": "g",
+        "bundle": "messaging_non_clips"
+    }
+    
+    print(f"DEBUG: Searching for stickers with query: '{q}', rating: '{rating}'", file=sys.stderr)
+    
+    try:
+        with httpx.Client(timeout=10.0) as client:
+            print("DEBUG: Making request to GIPHY API", file=sys.stderr)
+            response = client.get("https://api.giphy.com/v1/stickers/trending", params=params)
+            print(f"DEBUG: Response status: {response.status_code}", file=sys.stderr)
+            response.raise_for_status()
+            data = response.json()
+            
+            print(f"DEBUG: Got {len(data.get('data', []))} results from GIPHY", file=sys.stderr)
+            
+            results = []
+            for item in data.get("data", [])[:9]:
+                images = item.get("images", {})
+                sticker_data = {
+                    "url": images.get("original", {}).get("url", ""),
+                    "preview": images.get("preview_gif", {}).get("url", ""),
+                    "source": item.get("source_post_url", "https://giphy.com/")
+                }
+                results.append(sticker_data)
+                print(f"DEBUG: Added sticker: {sticker_data['url'][:50]}...", file=sys.stderr)
+            
+            if not results:
+                print(f"DEBUG: No results for query '{q}', trying fallback", file=sys.stderr)
+                fallback_params = params.copy()
+                fallback_params[limit] = 2
+                response = client.get("https://api.giphy.com/v1/stickers/trending", params=fallback_params)
+                response.raise_for_status()
+                data = response.json()
+                for item in data.get("data", [])[:1]:
+                    images = item.get("images", {})
+                    results.append({
+                        "url": images.get("original", {}).get("url", ""),
+                        "preview": images.get("preview_gif", {}).get("url", ""),
+                        "source": item.get("source_post_url", "https://giphy.com/")
+                    })
+            
+            print(f"DEBUG: Returning {len(results)} results", file=sys.stderr)
+            return results
+            
+    except httpx.RequestError as e:
+        print(f"ERROR: Network error: {str(e)}", file=sys.stderr)
+        return [{"url": "https://giphy.com/sticker-not-found-network-error", "preview": "", "source": "https://giphy.com/"}]
+    except httpx.HTTPStatusError as e:
+        print(f"ERROR: HTTP error: {e.response.status_code} - {e.response.text}", file=sys.stderr)
+        return [{"url": "https://giphy.com/sticker-not-found-http-error", "preview": "", "source": "https://giphy.com/"}]
+    except Exception as e:
+        print(f"ERROR: Unexpected error: {str(e)}", file=sys.stderr)
+        return [{"url": "https://giphy.com/sticker-not-found-unexpected-error", "preview": "", "source": "https://giphy.com/"}]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.post("/detect_emotion")
 async def detect_emotion_endpoint(request: EmotionRequest):
     """API endpoint to detect emotion from text."""
@@ -154,6 +314,34 @@ async def search_stickers_endpoint(request: StickerRequest):
     except Exception as e:
         print(f"ERROR: Sticker search failed: {str(e)}", file=sys.stderr)
         raise HTTPException(status_code=500, detail=str(e))
+        
+        
+        
+        
+        
+@app.post("/search_stickers_dashboard")
+async def search_stickers_dashboard_endpoint(request: StickerRequest):
+    """API endpoint to search for stickers."""
+    try:
+        results = search_stickers_dashboard(request.q)
+        return results
+    except Exception as e:
+        print(f"ERROR: Sticker search failed: {str(e)}", file=sys.stderr)
+        raise HTTPException(status_code=500, detail=str(e))
+        
+        
+        
+@app.post("/search_stickers_dashboard_recommend")
+async def search_stickers_dashboard_trending_endpoint():
+    """API endpoint to search for stickers."""
+    try:
+        results = search_stickers_recommend()
+        return results
+    except Exception as e:
+        print(f"ERROR: Sticker search failed: {str(e)}", file=sys.stderr)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 
 if __name__ == "__main__":
     import uvicorn

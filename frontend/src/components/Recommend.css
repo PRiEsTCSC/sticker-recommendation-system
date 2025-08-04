@@ -1,0 +1,253 @@
+/* src/styles/Recommend.css */
+/* Dark Mode Background */
+body.theme-dark .recommend-bg {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #282323, #080606);
+    background-image: url('../assets/dark_mode_image_light.webp');
+    background-size: cover;
+    animation: floatBG 15s ease-in-out infinite;
+}
+
+/* Light Mode Background */
+body.theme-light .recommend-bg {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #b5a4a45c, #c0abab);
+    background-image: url('../assets/light_mode_2_light.jpg');
+    background-size: cover;
+    animation: floatBG 15s ease-in-out infinite;
+    
+}
+
+
+@keyframes floatBG {
+
+    0%,
+    100% {
+        background-position: center center;
+    }
+
+    25% {
+        background-position: 30% 70%;
+    }
+
+    50% {
+        background-position: 70% 30%;
+    }
+
+    75% {
+        background-position: 40% 60%;
+    }
+}
+
+.recommend-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 1000px;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+}
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #ffffff;
+}
+
+
+/* body.theme-light .welcome-message h1,
+body.theme-dark .welcome-message p,
+body.theme-dark .welcome-message p,
+body.theme-dark .welcome-message p {
+    color: white;
+    right: 0%;
+} */
+
+
+.search-button-container {
+    margin-bottom: 2rem;
+}
+
+body.theme-dark .search-button {
+    color: #e0f2f7;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    top: -5rem;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.theme-light .search-button {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    top: -5rem;    
+    color: white;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+}
+
+.search-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.loading-spinner {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.results-container {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+}
+
+.result-card {
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    height: 200px;
+}
+
+.result-image {
+    height: 150px;
+    overflow: hidden;
+}
+
+.result-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.result-card:hover .result-image img {
+    transform: scale(1.05);
+}
+
+body.theme-dark .result-card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.theme-light .result-card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+    color: #ff4d4f;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+
+
+/* src/styles/Recommend.css */
+.search-results-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+body.theme-dark .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    color: #e0f2f7;
+}
+
+body.theme-light .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    color: #333333;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+.result-text {
+    color: #e0f2f7;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+
+.welcome-message, .search-button-container, .results-container, .error-message {
+    will-change: opacity, transform;
+}

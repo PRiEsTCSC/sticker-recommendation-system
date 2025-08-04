@@ -1,0 +1,141 @@
+.side-panel-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 40px;
+    z-index: 1000;
+}
+
+.side-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 240px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    pointer-events: all;
+}
+
+/* Hamburger icon button */
+.menu-toggle { /* Renamed from .toggle-btn for clarity, consistent with SidePanel.jsx */
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 30px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+}
+
+/* Specific style for the close button inside the open panel */
+.side-panel .menu-toggle.close-btn {
+    align-self: flex-end; /* Pushes it to the right within the flex column */
+    margin-right: 1rem; /* Spacing from the edge */
+    margin-top: 0.5rem; /* Spacing from the top */
+}
+
+
+.closed-menu {
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    height: 100%;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    background: transparent;
+}
+
+.closed-menu .menu-toggle { /* Use .menu-toggle for the hamburger icon */
+    left: 20%;
+    top: -2.01rem;
+}
+
+.closed-menu a {
+    margin-bottom: 1.5rem;
+}
+
+.closed-menu a .icon-container {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    backdrop-filter: blur(6px);
+    line-height: 2rem;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 4rem;
+    margin-left: 2.5rem;
+}
+
+.menu-items a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: background 0.3s;
+}
+
+.menu-items a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.menu-items a.active { /* Style for the active tab */
+    background: rgba(255, 255, 255, 0.3); /* Slightly more opaque */
+    font-weight: 700; /* Bolder text */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Subtle glow */
+}
+
+
+.menu-items a .icon-container {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    /* top: 10%; */
+}
+
+.logout-btn {
+    background: #ff4d4f;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-top: auto;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #e04344;
+}
+
+
+.side-panel, .closed-menu {
+    will-change: transform;
+}

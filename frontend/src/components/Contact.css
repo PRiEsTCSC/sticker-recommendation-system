@@ -1,0 +1,204 @@
+/* src/styles/Contact.css */
+
+/* Global Resets for consistent layout */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Contact Page Background */
+.contact-bg {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    animation: floatBG 15s ease-in-out infinite;
+}
+
+/* Dark Mode Background */
+body.theme-dark .contact-bg {
+    background: linear-gradient(135deg, #282323, #080606);
+    background-image: url('../assets/dark_mode_image_light.webp');
+    background-size: cover;
+    animation: none;
+}
+
+/* Light Mode Background */
+body.theme-light .contact-bg {
+    background: linear-gradient(135deg, #b5a4a45c, #c0abab);
+    background-image: url('../assets/light_mode_2_light.jpg');
+    background-size: cover;
+    animation: none;
+}
+
+ul {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style: none;
+    margin: 0 5px;
+}
+
+ul li a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Aligns image and text to the start */
+    gap: 14px; /* Adds space between image and text */
+    position: relative;
+    width: 210px;
+    height: 80px;
+    background: #fff;
+    transform: rotate(-30deg) skew(25deg) translate(0, 0);
+    transition: 0.5s;
+    box-shadow: -20px 20px 10px #fff;
+    border-radius: 0.2rem;
+    padding-left: 20px; /* Shifts content slightly to the right */
+}
+
+ul li a .contact-icon {
+    width: 40px;
+    height: 40px;
+    transition: 0.5s;
+}
+
+ul li a span {
+    padding: 0;
+    margin: 0;
+    letter-spacing: 4px;
+    transition: 0.5s;
+    color: black;
+}
+
+ul li a:hover {
+    transform: rotate(-30deg) skew(25deg) translate(20px, -15px);
+    box-shadow: -50px 50px 50px rgba(0,0ryn,0,0.5);
+}
+
+ul li a:hover .contact-icon {
+    content: url('../assets/github-hover.svg');
+}
+
+ul li:nth-child(2) a:hover .contact-icon {
+    content: url('../assets/email-hover.svg');
+}
+
+ul li:nth-child(3) a:hover .contact-icon {
+    content: url('../assets/phone-hover.svg');
+}
+
+ul li a::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    height: 100%;
+    width: 20px;
+    background-color: rgb(255, 255, 255);
+    transform: rotate(0deg) skewY(-45deg);
+    transition: 0.5s;
+    border-radius: 0.2rem;
+}
+
+ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -10px;
+    height: 20px;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    transform: rotate(0deg) skewX(-45deg);
+    transition: 0.5s;
+    border-radius: 0.2rem;
+}
+
+ul li:hover span {
+    color: #fff;
+}
+
+/* Github */
+ul li:hover:nth-child(1) a {
+    background: #000000;
+}
+
+ul li:hover:nth-child(1) a::before {
+    background: #000000;
+}
+
+ul li:hover:nth-child(1) a::after {
+    background: #000000;
+}
+
+/* Email */
+ul li:hover:nth-child(2) a {
+    background: #ce0101;
+}
+
+ul li:hover:nth-child(2) a::before {
+    background: #ce0101;
+}
+
+ul li:hover:nth-child(2) a::after {
+    background: #ce0101;
+}
+
+/* Phone */
+ul li:hover:nth-child(3) a {
+    background: #05cb3a;
+}
+
+ul li:hover:nth-child(3) a::before {
+    background: #05cb3a;
+}
+
+ul li:hover:nth-child(3) a::after {
+    background: #05cb3a;
+}
+
+.contact-container {
+    position: relative;
+    height: 30%;
+    width: 30%;
+    left: 35%;
+    top: 30%;
+    border-radius: 9rem;
+    color: #e0f2f7;
+    text-align: center;
+}
+
+.contact-list {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    right: 3rem;
+}
+
+* {
+    font-family: "Roboto", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.welcome-text2 h1 span {
+    position: relative;
+    font-family: 'lato', sans-serif;
+    top: 29px;
+    color: white;
+    display: inline-block;
+    font-size: 5rem;
+    text-shadow: 0 1px 0 #b7b7b7, 0 2px 0 #b7b7b7, 0 3px 0 #b7b7b7, 0 4px 0 #b7b7b7, 0 5px 0 #b7b7b7, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent, 0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.5);
+    
+}

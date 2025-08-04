@@ -1,10 +1,10 @@
+use chrono::{Duration, Utc};
+use jsonwebtoken::{decode, encode, DecodingKey, EncodingKey, Header, Validation};
 use serde::{Deserialize, Serialize};
-use jsonwebtoken::{encode, decode, Header, EncodingKey, DecodingKey, Validation};
-use chrono::{Utc, Duration};
 use std::env;
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Claims  {
+pub struct Claims {
     // pieces of information (key-value pairs) included in the payload section of a JWT
     pub sub: String,  // User ID
     pub role: String, // "user" or "admin"
@@ -24,45 +24,42 @@ impl AuthConfig {
     }
 }
 
-    pub fn create_token(user_id: &str, role:&str , config: &AuthConfig) -> Result<String, jsonwebtoken::errors::Error> {
-        let expiration = Utc::now()
-            .checked_add_signed(Duration::hours(24))
-            .expect("valid timestamp")
-            .timestamp() as usize;
+pub fn create_token(
+    user_id: &str,
+    role: &str,
+    config: &AuthConfig,
+) -> Result<String, jsonwebtoken::errors::Error> {
+    let expiration = Utc::now()
+        .checked_add_signed(Duration::hours(24))
+        .expect("valid timestamp")
+        .timestamp() as usize;
 
-        let claims = Claims {
-            sub: user_id.to_string(),
-            role: role.to_string(), // or "admin" based on your logic
-            exp: expiration,
-        };
+    let claims = Claims {
+        sub: user_id.to_string(),
+        role: role.to_string(), // or "admin" based on your logic
+        exp: expiration,
+    };
 
-        let token = encode(
-            &Header::default(),
-            &claims,
-            &EncodingKey::from_secret(config.secret.as_bytes()),
-        )?;
-        Ok(token)
-    }
+    let token = encode(
+        &Header::default(),
+        &claims,
+        &EncodingKey::from_secret(config.secret.as_bytes()),
+    )?;
+    Ok(token)
+}
 
-    pub fn validate_token(token: &str, config: &AuthConfig) -> Result<Claims, jsonwebtoken::errors::Error> {
-        let decoded = decode::<Claims>(
-            token,
-            &DecodingKey::from_secret(config.secret.as_bytes()),
-            &Validation::default(),
-        )?;
-        Ok(decoded.claims)
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+pub fn validate_token(
+    token: &str,
+    config: &AuthConfig,
+) -> Result<Claims, jsonwebtoken::errors::Error> {
+    let decoded = decode::<Claims>(
+        token,
+        &DecodingKey::from_secret(config.secret.as_bytes()),
+        &Validation::default(),
+    )?;
+    Ok(decoded.claims)
+}
+
 #[derive(Clone)]
 #[allow(dead_code)]
 pub struct AuthData {

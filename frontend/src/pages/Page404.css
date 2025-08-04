@@ -1,0 +1,53 @@
+/* src/styles/NotFound.css */
+
+.relative {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1a202c;
+    color: #fff;
+    overflow: hidden;
+}
+
+.content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.content h1 {
+    font-size: 6xl;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.content p {
+    font-size: 1.25rem;
+}
+
+.content a {
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+.content a:hover {
+    background-color: #1d4ed8;
+}
+
+#overlay {
+    position: absolute;
+    inset: 0;
+    background-color: #000;
+    z-index: 20;
+    pointer-events: none;
+    mask-image: radial-gradient(circle 120px at 50% 50%, transparent 0%, #000 150px);
+    -webkit-mask-image: radial-gradient(circle 120px at 50% 50%, transparent 0%, #000 150px);
+}

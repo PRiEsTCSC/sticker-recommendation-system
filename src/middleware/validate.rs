@@ -1,8 +1,8 @@
-use actix_web::{error::Error as ActixError, web, dev::ServiceRequest, HttpMessage};
+use crate::middleware::auth::{validate_token, AuthConfig, AuthData};
+use crate::structs::database_structs::DatabaseConnection;
+use actix_web::{dev::ServiceRequest, error::Error as ActixError, web, HttpMessage};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use std::pin::Pin;
-use crate::structs::database_structs::DatabaseConnection;
-use crate::middleware::auth::{validate_token, AuthConfig, AuthData};
 
 pub fn jwt_middleware(
     req: ServiceRequest,
@@ -17,14 +17,20 @@ pub fn jwt_middleware(
             Some(db) => db.clone(),
             None => {
                 log::error!("DatabaseConnection missing in app data");
-                return Err((actix_web::error::ErrorInternalServerError("DatabaseConnection missing"), req));
+                return Err((
+                    actix_web::error::ErrorInternalServerError("DatabaseConnection missing"),
+                    req,
+                ));
             }
         };
         let auth_config = match req.app_data::<web::Data<AuthConfig>>() {
             Some(config) => config.clone(),
             None => {
                 log::error!("AuthConfig missing in app data");
-                return Err((actix_web::error::ErrorInternalServerError("AuthConfig missing"), req));
+                return Err((
+                    actix_web::error::ErrorInternalServerError("AuthConfig missing"),
+                    req,
+                ));
             }
         };
 
@@ -45,7 +51,11 @@ pub fn jwt_middleware(
         log::info!("Validating session for token: {}", credentials.token());
         let session = match db.validate_session(credentials.token()).await {
             Ok(Some(session)) => {
-                log::info!("Session validated, user_id: {:?}, admin_id: {:?}", session.user_id, session.admin_id);
+                log::info!(
+                    "Session validated, user_id: {:?}, admin_id: {:?}",
+                    session.user_id,
+                    session.admin_id
+                );
                 session
             }
             Ok(None) => {
@@ -73,7 +83,10 @@ pub fn jwt_middleware(
                 Ok(id) => id,
                 Err(e) => {
                     log::error!("Invalid user ID format in claims: {}", e);
-                    return Err((actix_web::error::ErrorBadRequest("Invalid user ID format"), req));
+                    return Err((
+                        actix_web::error::ErrorBadRequest("Invalid user ID format"),
+                        req,
+                    ));
                 }
             }
         };
@@ -91,21 +104,38 @@ pub fn jwt_middleware(
             }
             Err(e) => {
                 log::error!("Database error while fetching user {}: {}", user_id, e);
-                return Err((actix_web::error::ErrorInternalServerError("Database error"), req));
+                return Err((
+                    actix_web::error::ErrorInternalServerError("Database error"),
+                    req,
+                ));
             }
         };
 
         // Verify token's sub matches user's ID
         if claims.sub != user.id.to_string() {
-            log::warn!("Token sub {} does not match user ID {}", claims.sub, user.id);
-            return Err((actix_web::error::ErrorUnauthorized("Token does not match user"), req));
+            log::warn!(
+                "Token sub {} does not match user ID {}",
+                claims.sub,
+                user.id
+            );
+            return Err((
+                actix_web::error::ErrorUnauthorized("Token does not match user"),
+                req,
+            ));
         }
 
         // Verify session's user_id matches user's ID (if session has user_id)
         if let Some(session_user_id) = session.user_id {
             if session_user_id != user.id {
-                log::warn!("Session user_id {} does not match user ID {}", session_user_id, user.id);
-                return Err((actix_web::error::ErrorUnauthorized("Session does not match user"), req));
+                log::warn!(
+                    "Session user_id {} does not match user ID {}",
+                    session_user_id,
+                    user.id
+                );
+                return Err((
+                    actix_web::error::ErrorUnauthorized("Session does not match user"),
+                    req,
+                ));
             }
         }
 
@@ -113,12 +143,16 @@ pub fn jwt_middleware(
         let role = "user";
         if req.path().starts_with("/admin") {
             log::warn!("Non-admin {} attempted admin access", claims.sub);
-            return Err((actix_web::error::ErrorForbidden("Admin access required"), req));
+            return Err((
+                actix_web::error::ErrorForbidden("Admin access required"),
+                req,
+            ));
         }
 
         // Attach AuthData to request extensions
         log::info!("Attaching AuthData: id={}, role={}", user.id, role);
-        req.extensions_mut().insert(AuthData::new(user.id.to_string(), role.to_string()));
+        req.extensions_mut()
+            .insert(AuthData::new(user.id.to_string(), role.to_string()));
 
         // Return the modified request
         log::info!("Middleware completed successfully for path: {}", req.path());

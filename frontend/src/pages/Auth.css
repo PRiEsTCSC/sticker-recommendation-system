@@ -1,0 +1,538 @@
+/* Add/Update these styles in Auth.css */
+
+/* Global Theme Toggle Container - Fixed positioning for all screens */
+.theme-toggle-container {
+    position: fixed; /* Changed from absolute to fixed */
+    top: 1.5rem;     /* Adjusted spacing */
+    right: 1.5rem;   /* Adjusted spacing */
+    z-index: 10000;  /* Increased z-index to ensure visibility */
+    pointer-events: all; /* Ensure it's clickable */
+}
+
+/* Theme Switch Styles */
+.theme-switch {
+    width: 120px;
+    height: 50px;
+    background-color: #f0f0f0;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background-color 1s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    pointer-events: all; /* Ensure it's clickable */
+}
+
+body.theme-dark .theme-switch {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+body.theme-light .theme-switch {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+
+.theme-switch-indicator {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+body.theme-dark .theme-switch-indicator {
+    background-color: #4a4a4a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.theme-switch.dark-mode .theme-switch-indicator {
+    transform: translateX(72px);
+}
+
+.theme-switch-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    transition: opacity 1s ease, transform 0.3s ease;
+}
+
+.theme-switch-icon.sun {
+    color: #ffc107;
+    left: 10px;
+    opacity: 1;
+}
+
+.theme-switch-icon.moon {
+    color: #bbdefb;
+    right: 10px;
+    opacity: 0;
+}
+
+.theme-switch.dark-mode .theme-switch-icon.sun {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.theme-switch.dark-mode .theme-switch-icon.moon {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.theme-switch-label {
+    position: absolute;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+    transition: opacity 1s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+body.theme-dark .theme-switch-label {
+    color: #bbb;
+}
+
+body.theme-light .theme-switch-label {
+    color: #333;
+}
+
+.theme-switch-label.light {
+    left: 55px;
+    opacity: 1;
+}
+
+.theme-switch-label.dark {
+    right: 55px;
+    opacity: 0;
+    left: 20px;
+}
+
+.theme-switch.dark-mode .theme-switch-label.light {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.theme-switch.dark-mode .theme-switch-label.dark {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Rest of your existing styles... */
+
+/* Add these styles to your existing Auth.css file */
+
+/* Welcome Page Background - integrated with theme system */
+body.theme-dark .welcome-bg,
+body.theme-light .welcome-bg {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Dark Mode Background */
+body.theme-dark .welcome-bg {
+    background: linear-gradient(135deg, #282323, #080606);
+    background-image: url('../assets/dark_mode_image_light.webp');
+    background-size: cover;
+    animation: floatBG 15s ease-in-out infinite;
+}
+
+/* Light Mode Background */
+body.theme-light .welcome-bg {
+    background: linear-gradient(135deg, #b5a4a45c, #c0abab);
+    background-image: url('../assets/light_mode_2_light.jpg');
+    background-size: cover;
+    animation: floatBG 15s ease-in-out infinite;
+    
+}
+
+
+@keyframes floatBG {
+
+    0%,
+    100% {
+        background-position: center center;
+    }
+
+    25% {
+        background-position: 30% 70%;
+    }
+
+    50% {
+        background-position: 70% 30%;
+    }
+
+    75% {
+        background-position: 40% 60%;
+    }
+}
+
+
+/* Glass Card for Welcome Text */
+body.theme-dark .glass-card,
+body.theme-light .glass-card  {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 4;
+    background: transparent;
+    pointer-events: none;
+}
+
+/* body.theme-light .glass-card {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 4;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: 10.5rem 12rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1), inset 0 0 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #333333;
+    pointer-events: none;
+} */
+
+/* Welcome Content Container */
+body.theme-dark .welcome-content,
+body.theme-light .welcome-content {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 4;
+}
+
+body.theme-light .welcome-content .welcome-text {
+    color: #000000; /* Darker text for light mode */
+}
+
+body.theme-dark .welcome-content .welcome-text {
+    color: #ffffff; /* Darker text for light mode */
+}
+
+body.theme-dark .welcome-content .welcome-text2  h1 span,
+body.theme-light .welcome-content .welcome-text2  h1 span  {
+    position: relative;
+    font-family: 'lato', sans-serif;
+    top: 20px;
+    color: white;
+    display: inline-block;
+    font-size: 5rem;
+    text-shadow: 0 1px 0 #b7b7b7, 0, 2px 0 b7b7b7, 0 3px 0 #b7b7b7, 0 4px 0 #b7b7b7, 0 5px 0 #b7b7b7, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent, 0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0.5);
+    animation:bounce 0.9s ease infinite alternate;
+}
+
+@keyframes bounce {
+
+    100% {
+        top: -20px;
+        text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc, 0 5px 0 #ccc, 0 6px 0 #ccc, 0 7px 0 #ccc, 0 8px 0 #ccc, 0 9px 0 #ccc , 0 10px 0 rgba(0, 0, 0.3);
+    }
+    
+}
+body.theme-dark .welcome-content .welcome-text  p,
+body.theme-light .welcome-content .welcome-text  p {
+    font-size: 1.2rem;
+    color: #e0f2f7; /* Lighter text for dark mode */
+    margin-top: 1rem;
+}
+
+
+
+body.theme-dark .welcome-content .welcome-text2  h1 span:nth-child(1),
+body.theme-light .welcome-content .welcome-text2  h1 span:nth-child(1){
+    animation-delay: 0s;
+}
+body.theme-dark .welcome-content .welcome-text2  h1 span:nth-child(2),
+body.theme-light .welcome-content .welcome-text2  h1 span:nth-child(2){
+    animation-delay: 0.1s;
+}
+body.theme-dark .welcome-content .welcome-text2  h1 span:nth-child(3),
+body.theme-light .welcome-content .welcome-text2  h1 span:nth-child(3){
+    animation-delay: 0.2s;
+}
+body.theme-dark .welcome-content .welcome-text2  h1 span:nth-child(1),
+body.theme-light .welcome-content .welcome-text2  h1 span:nth-child(4){
+    animation-delay: 0.3s;
+}
+body.theme-dark .welcome-content .welcome-text2  h1 span:nth-child(5),
+body.theme-light .welcome-content .welcome-text2  h1 span:nth-child(5){
+    animation-delay: 0.4s;
+}
+body.theme-dark .welcome-content .welcome-text2  h1 span:nth-child(6),
+body.theme-light .welcome-content .welcome-text2  h1 span:nth-child(6){
+    animation-delay: 0.5s;
+}
+body.theme-dark .welcome-content .welcome-text2  h1 span:nth-child(7),
+body.theme-light .welcome-content .welcome-text2  h1 span:nth-child(7){
+    animation-delay: 0.6s;
+}
+body.theme-dark .welcome-content .welcome-text2  h1 span:nth-child(8),
+body.theme-light .welcome-content .welcome-text2  h1 span:nth-child(8){
+    animation-delay: 0.7s;
+}
+
+
+
+
+
+
+
+
+/* Dashboard Title Card */
+body.theme-dark .dashboard-title-card {
+    position: absolute;
+    top: 2rem;
+    left: 45%;
+    transform: translateX(-50%);
+    z-index: 6;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    padding: 1rem 2.5rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4), inset 0 0 5px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #e0f2f7;
+    font-size: 1.8rem;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    white-space: nowrap;
+}
+
+body.theme-light .dashboard-title-card {
+    position: absolute;
+    top: 2rem;
+    left: 45%;
+    transform: translateX(-50%);
+    z-index: 6;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 1rem 2.5rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1), inset 0 0 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #333333;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    white-space: nowrap;
+}
+
+body.theme-dark .dashboard-title-card h1,
+body.theme-light .dashboard-title-card h1 ,
+body.theme-light .charts-container h2 {
+    margin: 0;
+    font-size: inherit;
+    color: #e0f2f7;
+}
+
+/* Charts Container */
+body.theme-dark .charts-container,
+body.theme-light .charts-container {
+    position: absolute;
+    top: 30%;
+    left: 27%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    height: 41%;
+    width: 50%;
+    padding: 2rem;
+    background: rgba(20, 20, 25, 0.1);
+    border-radius: 3rem;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.theme-dark .charts-container h2,
+body.theme-light .charts-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+body.theme-dark .charts-container h2 {
+    color: #e0f2f7;
+}
+
+body.theme-light .charts-container h2 {
+    color: #e0f2f7;
+    
+}
+
+/* Charts Grid */
+body.theme-dark .charts-grid,
+body.theme-light .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+    height: 70%;          /* Fill the charts-container height */
+    grid-auto-rows: 1fr;   /* Make rows equal height */
+}
+
+/* Chart Card */
+body.theme-dark .chart-card {
+    /* position: relative; */
+    background: rgba(255, 255, 255, 0.1); /* Glass effect */
+    border-radius: 1rem;
+    padding: 1.5rem;
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e0f2f7;
+
+    height: 100%;          /* Fill the grid cell height */
+    display: flex;         /* Use flexbox for internal layout */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;   /* Center children horizontally */
+}
+
+body.theme-light .chart-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #333333;
+
+    height: 100%;          /* Fill the grid cell height */
+    display: flex;         /* Use flexbox for internal layout */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;   /* Center children horizontally */
+}
+
+/* Ensure the ResponsiveContainer takes up available space */
+body.theme-dark .chart-card .recharts-responsive-container,
+body.theme-light .chart-card .recharts-responsive-container {
+    flex-grow: 1;          /* Allow chart to take remaining space */
+    width: 100%;           /* Full width of the card */
+}
+
+
+body.theme-dark .chart-card h3,
+body.theme-light .chart-card h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+body.theme-dark .chart-card h3 {
+    color: #e0f2f7;
+}
+
+body.theme-light .chart-card h3 {
+    color: #ffffff;
+}
+
+body.theme-dark .chart-count-label,
+body.theme-light .chart-count-label {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+body.theme-dark .chart-count-label {
+    color: #e0f2f7;
+}
+
+body.theme-light .chart-count-label {
+    color: #f3f3f3;
+}
+
+/* Chart Label Name */
+body.theme-dark .chart-label-name,
+body.theme-light .chart-label-name {
+    font-size: 14px;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+body.theme-dark .chart-label-name {
+    fill: #e0f2f7;
+}
+
+body.theme-light .chart-label-name {
+    fill: #333333;
+}
+
+
+body.theme-dark .auth-page-wrapper{
+    background: linear-gradient(135deg, #282323, #080606);
+}
+
+
+body.theme-dark .button-auth {
+    background: #5d6276;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+body.theme-light .button-auth {
+    background: #667eea;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+
+
+/* Add to Auth.css */
+
+/* ... (existing styles) ... */
+
+.button-cancel {
+    background: #ff4d4f; /* Red color for cancel */
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.button-cancel:hover {
+    background: #e04344;
+}
+
+/* ... (rest of Auth.css) ... */
+
+/* Auth.css */
+@media (max-width: 768px) {
+    body.theme-dark .charts-grid,
+    body.theme-light .charts-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Smaller cards on mobile */
+    }
+}

@@ -2,7 +2,7 @@ use std::sync::Arc;
 use redis::Client;
 use sqlx::{Pool, Postgres, FromRow};
 use serde::{Deserialize, Serialize};
-use chrono::NaiveDateTime;
+use chrono::{NaiveDateTime, Utc, DateTime};
 use uuid::Uuid;
 
 
@@ -19,14 +19,14 @@ pub struct User {
     pub password_hash: String,
 }
 
-#[derive(Debug, FromRow, Serialize)]
-pub struct Admin {
-    pub id: Uuid,
-    pub username: String,
-    pub password_hash: String,
-    pub last_login: Option<NaiveDateTime>,
-    pub failed_attempts: i32,
-}
+// #[derive(Debug, FromRow, Serialize)]
+// pub struct Admin {
+//     pub id: Uuid,
+//     pub username: String,
+//     pub password_hash: String,
+//     pub last_login: Option<NaiveDateTime>,
+//     pub failed_attempts: i32,
+// }
 
 #[allow(dead_code)]
 #[derive(Debug, FromRow)]
@@ -68,6 +68,16 @@ pub struct RecommendRequest {
     pub input_text: String,
 }
 
+#[derive(Deserialize, Debug)]
+pub struct TrendingRequest {
+    pub username: String,
+}
+
+#[derive(Serialize, Clone)]
+pub struct TrendingResponse {
+    pub sticker_urls: Vec<String>, // Changed from sticker_url: String
+}
+
 #[derive(Serialize, Clone)]
 pub struct RecommendResponse {
     pub detected_emotion: String,
@@ -95,7 +105,7 @@ pub struct StickerMetric {
 //     pub sticker_url: String,
 // }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct UpdateUsernameRequest {
     pub new_username: String,
 }
@@ -104,4 +114,30 @@ pub struct UpdateUsernameRequest {
 pub struct ManagementRequest {
     pub username: Option<String>,
     pub password: Option<String>,
+}
+
+#[derive(Serialize)]
+pub struct HistoryItem {
+    pub input_text: String,
+    pub detected_emotion: String,
+    pub sticker_url: Vec<String>,
+    pub created_at: DateTime<Utc>,
+}
+
+#[derive(Serialize)]
+pub struct HistoryResponse {
+    pub history: Vec<HistoryItem>,
+}
+
+#[derive(sqlx::FromRow)]
+pub struct DbHistoryItem {
+    pub input_text: String,
+    pub detected_emotion: String,
+    pub sticker_url: String,
+	pub created_at: NaiveDateTime,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct HistoryRequest {
+    pub username: String,
 }

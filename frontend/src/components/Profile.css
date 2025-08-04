@@ -1,0 +1,180 @@
+/* src/styles/Profile.css */
+
+body.theme-dark .profile-container,
+body.theme-light .profile-container  {
+    /* Adjust specific layout for profile */
+    position: absolute;
+    padding: 3rem 4rem;
+    width: auto;
+    max-width: 500px;
+    text-align: center;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3rem;
+    left: 41%;
+    top: 30%;
+    color: #e0f2f7;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+body.theme-light .profile-container p{
+    color: #ffffff; /* Darker text for light mode */
+}
+
+
+body.theme-dark .auth-page-wrapper{
+    background: linear-gradient(135deg, #282323, #080606);
+    background-color: #080606;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profile-header svg { /* Styling for the User icon */
+    margin-bottom: 1rem;
+    color: #a8dadc; /* A nice accent color */
+    filter: drop-shadow(0 0 8px rgba(168, 218, 220, 0.6));
+}
+
+.profile-header h2 {
+    
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #e0f2f7; /* Default color, overridden by theme in Auth.css */
+    font-size: 2.5rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+}
+
+.pencil{
+    color: #a8dadc; /* A nice accent color */
+    filter: drop-shadow(0 0 8px rgba(168, 218, 220, 0.6));
+}
+
+.username-text{
+    position: relative;
+    bottom: 10px;
+}
+
+
+.edit-icon {
+    cursor: pointer;
+    color: #8be9fd; /* A vibrant blue for the edit icon */
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.edit-icon:hover {
+    transform: scale(1.1);
+    color: #61dafb;
+}
+
+.username-edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.username-edit-form input {
+    width: calc(100% - 2rem); /* Account for padding */
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0f2f7;
+    font-size: 1.1rem;
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.username-edit-form input:focus {
+    border-color: #8be9fd;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.form-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.form-actions .button-auth { /* For the Rename button */
+    background: #667eea;
+    color: #fff;
+}
+
+.form-actions .button-auth:hover {
+    background: #5a67d8;
+}
+
+.form-actions .button-cancel { /* For the Cancel button */
+    background: #ff4d4f;
+    color: #fff;
+}
+
+.form-actions .button-cancel:hover {
+    background: #e04344;
+}
+
+body.theme-light .profile-header h2,
+body.theme-light .profile-header svg,
+body.theme-light .profile-header form :required-shown,
+body.theme-light .profile-container p {
+    color: #090404; /* Darker color for light mode */
+    filter: none; /* Remove glow in light mode */
+}
+
+body.theme-light .edit-icon {
+    color: #007bff; /* Blue for edit icon in light mode */
+}
+
+body.theme-light .username-edit-form input 
+body.theme-light .username-edit-form input  {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #333333;
+}
+
+body.theme-light .username-edit-form input:focus {
+    border-color: #007bff;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body.theme-light .msg {
+    color: red; /* Error message color remains red */
+}
+
+
+.profile-container, .username-edit-form, .msg {
+    will-change: opacity, transform, height;
+}
