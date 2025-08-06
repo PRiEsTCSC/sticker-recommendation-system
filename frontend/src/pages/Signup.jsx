@@ -8,7 +8,7 @@ import ThemeToggle from '../components/ThemeToggle';
 
 const SignUp = () => {
     const [username, setUsername] = useState('');
-    const [password] = useState('');
+    const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
     const [theme, setTheme] = useState('dark'); // Default theme
     const navigate = useNavigate();
@@ -88,7 +88,9 @@ const SignUp = () => {
                     <input
                         type="text"
                         placeholder="Username"
+                        name='username'
                         value={username}
+                        autoComplete="username"
                         onChange={e => setUsername(e.target.value)}
                         required
                     />
@@ -96,7 +98,10 @@ const SignUp = () => {
                         type="password"
                         placeholder="Password"
                         value={password}
-                        onChange={e => e.target.value = e.target.value.trim().replace(/\s/g, '')}
+                        // onChange={e => e.target.value = e.target.value.trim().replace(/\s/g, '')}
+                        // made the user input password unwritable
+                        onChange={e => setPassword(e.target.value)}
+                        
                         required
                     />
                     <button type="submit">Sign Up</button>
