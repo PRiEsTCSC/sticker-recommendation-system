@@ -54,14 +54,14 @@ const Contact = () => {
                             </li>
 
                             <li>
-                                <a href="mailto:noblegabriel40@gmail.com">
+                                <a href="mailto:noblegabriel40@gmail.com" target="_blank" rel="noopener noreferrer" >
                                     <img src={emailIcon} alt="Email" className="contact-icon" />
                                     <span>- Email</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="tel:+2348148184636">
+                                <a href="tel:+2348148184636" target="_blank" rel="noopener noreferrer" >
                                     <img src={phoneIcon} alt="Phone" className="contact-icon" />
                                     <span>- Phone</span>
                                 </a>
