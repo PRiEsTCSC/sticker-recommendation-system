@@ -51,6 +51,7 @@ pub async fn init_app() -> std::io::Result<()> {
                             .wrap(auth.clone())
                             .configure(routes::user::init_routes)
                             .configure(routes::history::init_routes)
+                            .configure(routes::top_stickers::init_routes),
 
                     )
                     .service(

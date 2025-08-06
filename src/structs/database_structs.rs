@@ -141,3 +141,21 @@ pub struct DbHistoryItem {
 pub struct HistoryRequest {
     pub username: String,
 }
+
+#[derive(sqlx::FromRow)]
+pub struct TopStickerItem {
+    pub input_text: String,
+    pub sticker_url: String,
+    pub usage_count: i64,
+}
+#[derive(Serialize)]
+pub struct TopSticker {
+    pub input_text: String,
+    pub sticker_url: String,
+    pub usage_count: u32,
+}
+
+#[derive(serde::Deserialize)]
+pub struct TopStickerRequest {
+    pub username: String,
+}

@@ -4,3 +4,4 @@ pub mod health;
 pub mod recommend;
 pub mod user;
 pub mod history;
+pub mod top_stickers;

@@ -1,10 +1,10 @@
-use actix_web::{post, web, HttpMessage, HttpRequest, HttpResponse, Responder};
+use actix_web::{get, web, HttpMessage, HttpRequest, HttpResponse, Responder};
 use crate::structs::database_structs::{DatabaseConnection, HistoryResponse, HistoryRequest};
 use crate::middleware::auth::AuthData;
 use uuid::Uuid;
 use log;
 
-#[post("/history")]
+#[get("/history")]
 async fn get_history(
     db: web::Data<DatabaseConnection>,
     req: web::Json<HistoryRequest>,

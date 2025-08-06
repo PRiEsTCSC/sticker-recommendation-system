@@ -3,8 +3,7 @@ use std::sync::Arc;
 use crate::{
     configs::env_load::{load_database_url, load_redis_url},
     structs::database_structs::{
-        DatabaseConnection, DbHistoryItem, HistoryItem, ManagementRequest, RegisterRequest,
-        Session, User,
+        DatabaseConnection, DbHistoryItem, HistoryItem, ManagementRequest, RegisterRequest, Session, TopSticker, TopStickerItem, User
     },
 };
 use chrono::{NaiveDateTime, DateTime, Utc};
@@ -328,9 +327,9 @@ impl DatabaseConnection {
     pub async fn get_user_history(&self, user_id: Uuid) -> Result<Vec<HistoryItem>, sqlx::Error> {
         let rows = sqlx::query_as::<_, DbHistoryItem>(
             "SELECT input_text, detected_emotion, sticker_url, created_at 
-             FROM interactions 
-             WHERE user_id = $1 
-             ORDER BY created_at DESC",
+            FROM interactions 
+            WHERE user_id = $1 
+            ORDER BY created_at DESC",
         )
         .bind(user_id)
         .fetch_all(&self.pool)
@@ -356,5 +355,30 @@ impl DatabaseConnection {
         }).collect();
 
         Ok(history)
+    }
+
+
+    pub async fn get_top_stickers(&self, user_id: Uuid) -> Result<Vec<TopSticker>, sqlx::Error> {
+        let rows = sqlx::query_as::<_, TopStickerItem>(
+            r#"
+            SELECT input_text, sticker_url, COUNT(*) as usage_count
+            FROM interactions
+            WHERE user_id = $1
+            GROUP BY input_text, sticker_url
+            ORDER BY usage_count DESC
+            LIMIT 4
+            "#,
+        )
+        .bind(user_id)
+        .fetch_all(&self.pool)
+        .await?;
+
+        let top_stickers = rows.into_iter().map(|row| TopSticker {
+            input_text: row.input_text,
+            sticker_url: row.sticker_url,
+            usage_count: row.usage_count as u32,
+        }).collect();
+
+        Ok(top_stickers)
     }
 }
