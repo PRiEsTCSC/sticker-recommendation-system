@@ -2,3 +2,5 @@
 **/*vscode
 .env
 log.log
+./rust-backend/.env
+./sticker-api/.env
