@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: stickerdb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-net
+
+  rust-backend:
+    build:
+      context: ./rust-backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./rust-backend/.env
+    depends_on:
+      - db
+      - sticker-api
+    ports:
+      - "8080:8080"
+    networks:
+      - app-net
+
+  sticker-api:
+    build:
+      context: ./sticker-api
+    env_file:
+      - ./sticker-api/.env
+    ports:
+      - "8000:8000"
+    networks:
+      - app-net
+
+  vite-frontend:
+    build:
+      context: ./vite-frontend
+    env_file:
+      - ./vite-frontend/.env
+    ports:
+      - "5173:5173"
+    networks:
+      - app-net
+    depends_on:
+      - rust-backend
+
+volumes:
+  db-data:
+
+networks:
+  app-net:
+    driver: bridge
