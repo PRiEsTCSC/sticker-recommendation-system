@@ -8,7 +8,7 @@ import { useTheme } from '../context/ThemeContext';
 // import '../pages/Auth.css'; // CORRECTED PATH for Auth.css
 import './Profile.css'; // CORRECTED PATH for Profile.css
 
-const API_BASE_URL = "http://localhost:8080"; // Adjust this to your API base URL
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const toProperCase = str =>
     str

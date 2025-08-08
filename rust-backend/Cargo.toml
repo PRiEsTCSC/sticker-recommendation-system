@@ -1,5 +1,5 @@
 [package]
-name = "sticker-proj"
+name = "rust-backend"
 version = "0.1.0"
 edition = "2021"
 description = "A Rust web server application built with Actix for sticker recommendation"

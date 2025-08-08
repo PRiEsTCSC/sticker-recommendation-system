@@ -12,7 +12,7 @@ const SignUp = () => {
     const [msg, setMsg] = useState('');
     const [theme, setTheme] = useState('dark'); // Default theme
     const navigate = useNavigate();
-    const API_BASE_URL = "http://localhost:8080"; // Adjust this to your API base URL
+    const API_BASE_URL = import.meta.env.VITE_API_URL;
 
     // Effect to apply theme from localStorage on component mount
     useEffect(() => {

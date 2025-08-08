@@ -40,7 +40,7 @@ async fn find_sticker(
 
     // Call Emotion Detection Service
     let emotion_response = match client
-        .post("http://localhost:8000/detect_emotion")
+        .post("http:///sticker-api:8000/detect_emotion")
         .json(&serde_json::json!({ "input_text": &input_text }))
         .send()
         .await
@@ -92,7 +92,7 @@ async fn find_sticker(
 
     // Call Sticker Search Service
     let sticker_response = match client
-        .post("http://localhost:8000/search_stickers")
+        .post("http:///sticker-api:8000/search_stickers")
         .json(&serde_json::json!({ "q": &detected_emotion, "rating": "g" }))
         .send()
         .await
@@ -202,7 +202,7 @@ async fn find_sticker_dashboard(
 
     // Call Emotion Detection Service
     let emotion_response = match client
-        .post("http://localhost:8000/detect_emotion")
+        .post("http:///sticker-api:8000/detect_emotion")
         .json(&serde_json::json!({ "input_text": &input_text }))
         .send()
         .await
@@ -254,7 +254,7 @@ async fn find_sticker_dashboard(
 
     // Call Sticker Search Service
     let sticker_response = match client
-        .post("http://localhost:8000/search_stickers_dashboard")
+        .post("http:///sticker-api:8000/search_stickers_dashboard")
         .json(&serde_json::json!({ "q": &detected_emotion, "rating": "g" }))
         .send()
         .await

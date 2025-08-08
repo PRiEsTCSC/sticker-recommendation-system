@@ -8,7 +8,7 @@ import SidePanel from '../components/SidePanel';
 import ThemeToggle from '../components/ThemeToggle';
 import './Search.css';
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 
 const SearchPage = () => {
@@ -18,66 +18,6 @@ const SearchPage = () => {
     const [isSearchBarActive, setIsSearchBarActive] = useState(false);
     const [error, setError] = useState(null);
     const [showLoading, setShowLoading] = useState(false);
-
-    const updateUI = useCallback(() => {}, []);
-
-    // const handleSearch = async (e) => {
-    //     e.preventDefault();
-    //     if (!searchQuery.trim()) return;
-
-    //     setShowLoading(true); 
-
-    //     setLoading(true);
-    //     setError(null);
-    //     setResults([]);
-
-    //     try {
-    //         const userToken = localStorage.getItem('user_token');
-    //         const username = localStorage.getItem('username');
-
-    //         if (!userToken || !username) {
-    //             throw new Error('User not authenticated');
-    //         }
-
-    //         const res = await fetch(`${API_BASE_URL}/v1/sticker/dashboard-find`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': `Bearer ${userToken}`,
-    //             },
-    //             body: JSON.stringify({
-    //                 username: username,
-    //                 input_text: searchQuery,
-    //             }),
-    //         });
-
-    //         const data = await res.json();
-
-    //         if (res.ok) {
-    //             setResults(data.sticker_urls || []);
-    //         } else {
-    //             setError(data.error || 'Search failed');
-    //         }
-    //     } catch (err) {
-    //         setError('An error occurred while searching');
-    //         console.error('Search error:', err);
-    //     } finally {
-    //         setLoading(false);
-    //         setShowLoading(false); // Hide loading modal
-
-    //     }
-    // };
-
-    // const handleSearchBarClick = () => {
-    //     setIsSearchBarActive(true);
-    // };
-
-    // const handleSearchBarClose = () => {
-    //     setIsSearchBarActive(false);
-    //     setSearchQuery('');
-    //     setResults([]);
-    //     setError(null);
-    // };
 
     const debouncedSearch = useCallback(
         debounce(async (query) => {
