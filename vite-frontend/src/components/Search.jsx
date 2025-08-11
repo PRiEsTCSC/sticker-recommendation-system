@@ -18,7 +18,8 @@ const SearchPage = () => {
     const [isSearchBarActive, setIsSearchBarActive] = useState(false);
     const [error, setError] = useState(null);
     const [showLoading, setShowLoading] = useState(false);
-
+    // Memoize updateUI to prevent unnecessary re-renders of SidePanel
+    const updateUI = useCallback(() => {}, []);
     const debouncedSearch = useCallback(
         debounce(async (query) => {
             if (!query.trim()) return;

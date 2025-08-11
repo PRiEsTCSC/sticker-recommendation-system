@@ -1,40 +1,49 @@
-# Stage 1 - Builder
-FROM rustlang/rust:nightly-slim as builder
+# rust-backend/Dockerfile
+# Optimized multi-stage build with caching for faster rebuilds
 
-WORKDIR /app
+# Builder stage
+FROM rustlang/rust:nightly AS builder
 
-
-# Install system deps needed for OpenSSL and pkg-config
+# Install system dependencies needed for compilation
 RUN apt-get update \
- && apt-get install -y --no-install-recommends \
-    pkg-config libssl-dev ca-certificates \
+ && apt-get install -y --no-install-recommends pkg-config libssl-dev ca-certificates build-essential \
  && rm -rf /var/lib/apt/lists/*
 
-# Copy manifests first for caching
+WORKDIR /app
+
+# Copy dependency manifests first to cache dependencies
 COPY Cargo.toml Cargo.lock ./
 
-# Create dummy src to pass build check (avoids rebuilds)
-RUN mkdir src && echo "fn main() { println!(\"dummy\"); }" > src/main.rs && \
-    cargo build --release && rm -rf src
+# Create a dummy main.rs to cache dependency compilation
+RUN mkdir src && echo "fn main() {}" > src/main.rs \
+ && cargo build --release \
+ && rm -rf src
 
-# Now copy real source
-COPY ./src ./src
+# Copy the actual source code
+COPY . .
 
-# Build the release binary
+# Build the release binary (will use cached dependencies if unchanged)
 RUN cargo build --release
 
-# Stage 2 - Final runtime
+# Runtime stage
 FROM debian:bookworm-slim
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Install SSL if needed for reqwest or HTTPS
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
+# Copy the compiled binary from the builder
+COPY --from=builder /app/target/release/rust-backend ./rust-backend
 
-COPY --from=builder /app/target/release/rust-backend .
+# Copy runtime configuration files
+COPY .env ./
+COPY log4rs.yaml ./
+RUN touch ./log.log && chmod 666 ./log.log
 
-# Optional: include .env for runtime config
-COPY .env .
+# Ensure /app is writable
+RUN chmod -R 777 /app
 
 EXPOSE 8080
 
